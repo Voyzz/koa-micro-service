@@ -1,23 +1,15 @@
 const mysql = require("mysql");
 const sql_config = require('../sql_config.js')
+let sql_data = {}
 
 module.exports = async (ctx) => {
     const { id } = ctx.params;
-    let sql_data={'a':'b'};
 
-    const connection = mysql.createConnection(sql_config);
-    connection.connect();
-    // `SELECT * FROM \`books\` WHERE \`id\` = \`${id}\``
+    const pool = mysql.createPool(sql_config);
 
-    await connection.query("SELECT * FROM `books` WHERE `id` = '21'", function(err, rows, fields) {
-        if (err) throw err;
-        sql_data = rows;
-        console.log('aaaaaa')
+    await pool.query(`SELECT * FROM \`books\` WHERE \`id\` = \'${id}\'`,(err,res,fields)=>{
+        sql_data = res;
     });
 
-    console.log('bbbbb')
-
     ctx.body = {message:sql_data};
-
-    connection.end();
 }
