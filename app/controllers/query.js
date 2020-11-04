@@ -1,9 +1,22 @@
 const mysql = require("mysql");
-const sql_config = require('../sql_config.js')
-let sql_data
+const sql_config = require('../sql_config.js');
+const { Sequelize } = require('sequelize');
+const urlParamsParse = require('../utils/urlParamsParse.js');
+
+let sql_data;
 
 module.exports = async (ctx) => {
-    const { id } = ctx.params;
+    // const sequelize = new Sequelize(sql_config.database, sql_config.user, sql_config.password, {
+    //     host: sql_config.host,
+    //     dialect: 'mysql',
+    //     pool: {
+    //         max: 5,
+    //         min: 0,
+    //         idle: 30000
+    //     }
+    // });
+
+    const { id } = urlParamsParse(ctx.request.url);
 
     const pool = mysql.createPool(sql_config);
 
@@ -11,7 +24,5 @@ module.exports = async (ctx) => {
         sql_data = res;
     });
 
-    ctx.body = {message:{
-        'test':sql_data
-    }};
+    ctx.body = {message:sql_data};
 }
