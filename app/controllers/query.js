@@ -1,28 +1,30 @@
-const mysql = require("mysql");
-const sql_config = require('../sql_config.js');
-const { Sequelize } = require('sequelize');
 const urlParamsParse = require('../utils/urlParamsParse.js');
-
-let sql_data;
+const { User } = require('../dbModel');
 
 module.exports = async (ctx) => {
-    // const sequelize = new Sequelize(sql_config.database, sql_config.user, sql_config.password, {
-    //     host: sql_config.host,
-    //     dialect: 'mysql',
-    //     pool: {
-    //         max: 5,
-    //         min: 0,
-    //         idle: 30000
-    //     }
-    // });
+    const { name,gender,birth } = urlParamsParse(ctx.request.url);
+    const now = Date.now();
 
-    const { id } = urlParamsParse(ctx.request.url);
+    await User.sync({alter: true})
 
-    const pool = mysql.createPool(sql_config);
-
-    await pool.query(`SELECT * FROM \`user\` WHERE \`User\` = \'${id}\'`,(err,res,fields)=>{
-        sql_data = res;
+    var me = await User.create({
+        id: 'd-' + now,
+        name: name,
+        gender: gender,
+        birth: birth,
     });
 
-    ctx.body = {message:sql_data};
+    // await me.save();
+    // const users = await User.findAll();
+
+    // console.log('created: ' + JSON.stringify(me));
+
+
+    // const pool = mysql.createPool(sql_config);
+
+    // await pool.query(`SELECT * FROM \`user\` WHERE \`User\` = \'${id}\'`,(err,res,fields)=>{
+    //     sql_data = res;
+    // });
+
+    // ctx.body = {message:users};
 }
