@@ -5,6 +5,6 @@ const router = new Router();
 
 // ********** 路由 **********
 // 查询书籍信息
-router.get('/query', Controllers.query);
+router.get('/user', Controllers.user);
 
 module.exports = router;
