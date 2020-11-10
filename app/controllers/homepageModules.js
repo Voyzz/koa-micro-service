@@ -1,11 +1,8 @@
-const urlParamsParse = require('../utils/urlParamsParse.js');
+// const urlParamsParse = require('../utils/urlParamsParse.js');
 const { HomeModules } = require('../dbModel');
 
 module.exports = async (ctx) => {
-    const { pType,moduleType,moduleData,onShow,position } = urlParamsParse(ctx.request.url);
-    let _responseObj = {
-        
-    }
+    const { pType,moduleType,moduleData,onShow,position } = Object.assign(ctx.request.body,ctx.request.query);
 
     switch (pType) {
         case 'create':
@@ -24,6 +21,8 @@ module.exports = async (ctx) => {
                 module_data: moduleData
             });
 
+            ctx.body = {'message':'create module '+pType+' success'}
+
             break;
 
         case 'update':
@@ -39,6 +38,8 @@ module.exports = async (ctx) => {
                 }
             });
 
+            ctx.body = {'message':'update module '+pType+' success'}
+
             break;
 
         case 'delete':
@@ -48,6 +49,8 @@ module.exports = async (ctx) => {
                     module_type: moduleType,
                 }
             })
+
+            ctx.body = {'message':'delete module '+pType+' success'}
             break;
 
         default:
@@ -57,9 +60,18 @@ module.exports = async (ctx) => {
             if(!!onShow) readOpt.on_show = onShow;
             if(!!position) readOpt.position = position;
 
-            const homeModules = await HomeModules.findAll({
+            let homeModules = await HomeModules.findAll({
                 where:readOpt
             });
+
+            if(homeModules.length > 0){
+                homeModules.map((r,i)=>{
+                    if(!!r.module_data){
+                        r.module_data =  JSON.parse(r.module_data);
+                    }
+                });
+            }
+
             ctx.body = homeModules;
 
             break;
