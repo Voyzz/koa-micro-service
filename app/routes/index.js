@@ -4,7 +4,7 @@ const Controllers = require('../controllers');
 const router = new Router();
 
 // ********** 路由 **********
-// 查询书籍信息
-router.get('/user', Controllers.user);
+// 主页模块接口
+router.get('/homepageModules', Controllers.homepageModules);
 
 module.exports = router;
