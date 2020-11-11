@@ -1,4 +1,3 @@
-// const urlParamsParse = require('../utils/urlParamsParse.js');
 const { HomeModules } = require('../dbModel');
 
 module.exports = async (ctx) => {
@@ -21,7 +20,7 @@ module.exports = async (ctx) => {
                 module_data: moduleData
             });
 
-            ctx.body = {'message':'create module '+pType+' success'}
+            ctx.body = {'message':'create module '+moduleType+' success'}
 
             break;
 
@@ -38,7 +37,7 @@ module.exports = async (ctx) => {
                 }
             });
 
-            ctx.body = {'message':'update module '+pType+' success'}
+            ctx.body = {'message':'update module '+moduleType+' success'}
 
             break;
 
@@ -50,7 +49,7 @@ module.exports = async (ctx) => {
                 }
             })
 
-            ctx.body = {'message':'delete module '+pType+' success'}
+            ctx.body = {'message':'delete module '+moduleType+' success'}
             break;
 
         default:

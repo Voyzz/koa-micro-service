@@ -9,7 +9,7 @@ const sequelize = new Sequelize (
     {
         host: sql_config.host,
         dialect: 'mysql',
-        pool: { max: 5,min: 0,idle: 30000 }
+        pool: { max: 10,min: 0,idle: 30000 }
     }
 );
 
@@ -25,5 +25,7 @@ const HomeModules = sequelize.define('HomeModules', {
 }, {
     timestamps: false
 });
+
+
 
 module.exports = { HomeModules };
