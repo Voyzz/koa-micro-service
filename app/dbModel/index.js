@@ -26,6 +26,18 @@ const HomeModules = sequelize.define('HomeModules', {
     timestamps: false
 });
 
+const IntroductionModules = sequelize.define('IntroductionModules',{
+    id: { type: DataTypes.STRING,primaryKey: true },
+    name: { type: DataTypes.STRING },
+    path: { type: DataTypes.STRING },
+    on_show: { type: DataTypes.BOOLEAN,defaultValue:true },
+    position: { type: DataTypes.INTEGER },
+    module_type: { type: DataTypes.STRING,allowNull:false },
+    module_data: { type: DataTypes.JSON },
+}, {
+    timestamps: false
+});
 
 
-module.exports = { HomeModules };
+
+module.exports = { HomeModules,IntroductionModules };
