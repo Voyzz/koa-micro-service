@@ -9,7 +9,7 @@ const sequelize = new Sequelize (
     {
         host: sql_config.host,
         dialect: 'mysql',
-        pool: { max: 10,min: 0,idle: 30000 }
+        pool: { max: 10,min: 0,idle: 30000 },
     }
 );
 
@@ -26,6 +26,7 @@ const HomeModules = sequelize.define('HomeModules', {
     timestamps: false
 });
 
+// 介绍页模块
 const IntroductionModules = sequelize.define('IntroductionModules',{
     id: { type: DataTypes.STRING,primaryKey: true },
     name: { type: DataTypes.STRING },
@@ -38,6 +39,70 @@ const IntroductionModules = sequelize.define('IntroductionModules',{
     timestamps: false
 });
 
+// 产品基础信息
+const ProductBasicInfo = sequelize.define('ProductBasicInfo',{
+    pro_id: { type: DataTypes.STRING,primaryKey: true },
+    pro_number: { type: DataTypes.STRING,defaultValue:'' },
+    title: { type: DataTypes.STRING },
+    substitle: { type: DataTypes.STRING,defaultValue:'' },
+    is_favorite: { type: DataTypes.BOOLEAN,defaultValue:false },
+    is_top: { type: DataTypes.BOOLEAN,defaultValue:false },
+    is_show: { type: DataTypes.BOOLEAN,defaultValue:true },
+    extra_flag: { type: DataTypes.BOOLEAN,defaultValue:false },
+    tags_list: { type: DataTypes.STRING,defaultValue:'' },
+    class_list: { type: DataTypes.STRING,defaultValue:'' }
+}, {
+    timestamps: false,
+    charset: 'utf8',
+    collate: 'utf8_unicode_ci'
+});
 
+// 产品图片
+const ProductImageInfo = sequelize.define('ProductImageInfo',{
+    img_id: { type: DataTypes.STRING },
+    pro_id: { type: DataTypes.STRING },
+    img_url: { type: DataTypes.STRING,defaultValue:'' },
+    is_show: { type: DataTypes.BOOLEAN,defaultValue:true },
+    is_cover: { type: DataTypes.BOOLEAN,defaultValue:false },
+}, {
+    timestamps: false,
+    charset: 'utf8',
+    collate: 'utf8_unicode_ci'
+});
 
-module.exports = { HomeModules,IntroductionModules };
+// 产品详情
+const ProductDetailInfo = sequelize.define('ProductDetailInfo',{
+    pro_id: { type: DataTypes.STRING },
+    type: { type: DataTypes.STRING,defaultValue:'info' },
+    name: { type: DataTypes.STRING,defaultValue:'' },
+    content: { type: DataTypes.STRING,defaultValue:'' },
+    detail_obj: { type: DataTypes.STRING,defaultValue:'' },
+    detail_arr: { type: DataTypes.STRING,defaultValue:'' },
+}, {
+    timestamps: false,
+    charset: 'utf8',
+    collate: 'utf8_unicode_ci'
+});
+
+// 产品价格
+const ProductPriceInfo = sequelize.define('ProductPriceInfo',{
+    pro_id: { type: DataTypes.STRING },
+    date: { type: DataTypes.STRING,defaultValue:'' },
+    price: { type: DataTypes.STRING,defaultValue:'' },
+    unit: { type: DataTypes.STRING,defaultValue:'' },
+    currency: { type: DataTypes.STRING,defaultValue:'' },
+    is_recent: { type: DataTypes.BOOLEAN },
+}, {
+    timestamps: false,
+    charset: 'utf8',
+    collate: 'utf8_unicode_ci'
+});
+
+module.exports = {
+    HomeModules,
+    IntroductionModules,
+    ProductBasicInfo,
+    ProductImageInfo,
+    ProductDetailInfo,
+    ProductPriceInfo
+};
