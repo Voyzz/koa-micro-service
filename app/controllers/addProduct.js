@@ -12,8 +12,8 @@ module.exports = async (ctx) => {
 
     const {
         pro_image_list,
-        // pro_detail_list,
-        // price_list
+        pro_detail_list,
+        price_list
     } = _params;
 
     // 创建图片列表
@@ -29,6 +29,30 @@ module.exports = async (ctx) => {
             });
         })
         delete _params.pro_image_list;
+    }
+
+    // 创建详情列表
+    if(!!pro_detail_list) {
+        const detail_list = JSON.parse(pro_detail_list).list;
+        !!detail_list && detail_list.length>0 && detail_list.map((detail,idx) => {
+            ProductDetailInfo.sync({alter: true});
+            ProductDetailInfo.create({
+                ...detail,
+                pro_id: 'pro-' + now,
+            });
+        })
+    }
+
+    // 创建价格列表
+    if(!!price_list) {
+        const _price_list = JSON.parse(price_list).list;
+        !!_price_list && _price_list.length>0 && _price_list.map((price,idx) => {
+            ProductPriceInfo.sync({alter: true});
+            ProductPriceInfo.create({
+                ...price,
+                pro_id: 'pro-' + now,
+            });
+        })
     }
 
     // 创建基础信息
