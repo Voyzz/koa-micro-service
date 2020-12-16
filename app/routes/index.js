@@ -12,6 +12,9 @@ router.post('/introductionModules', controllers.introductionModules);
 router.post('/getProductList', controllers.getProductList);
 // 创建产品
 router.post('/addProduct', controllers.addProduct);
-
+// 更新产品
+router.post('/updateProduct', controllers.updateProduct);
+// 删除产品
+router.post('/deleteProduct', controllers.deleteProduct);
 
 module.exports = router;

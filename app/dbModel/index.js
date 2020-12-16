@@ -43,7 +43,7 @@ const IntroductionModules = sequelize.define('IntroductionModules',{
 const ProductBasicInfo = sequelize.define('ProductBasicInfo',{
     pro_id: { type: DataTypes.STRING,primaryKey: true },
     pro_number: { type: DataTypes.STRING,defaultValue:'' },
-    title: { type: DataTypes.STRING },
+    title: { type: DataTypes.STRING,defaultValue:'' },
     substitle: { type: DataTypes.STRING,defaultValue:'' },
     is_favorite: { type: DataTypes.BOOLEAN,defaultValue:false },
     is_top: { type: DataTypes.BOOLEAN,defaultValue:false },

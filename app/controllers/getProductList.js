@@ -41,7 +41,10 @@ module.exports = async (ctx) => {
 
     let productBasicInfoList = await ProductBasicInfo.findAll({
         // 基础信息
-        where:request_params
+        where:request_params,
+        order:[
+            ['pro_id','DESC']
+        ]
     });
 
     let response_data = [...productBasicInfoList];
