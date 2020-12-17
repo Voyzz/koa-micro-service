@@ -16,11 +16,13 @@ is_show,
 extra_flag,
 class_reg,
 tags_reg,
+title_reg,
+subtitle_reg
 ***/
 
 module.exports = async (ctx) => {
     const request_params = Object.assign(ctx.request.body,ctx.request.query);
-    const {is_basic,class_reg,tags_reg} = request_params;
+    const {is_basic,class_reg,tags_reg,title_reg,subtitle_reg} = request_params;
 
     // 根据类别筛选
     if(!!class_reg){
@@ -35,6 +37,20 @@ module.exports = async (ctx) => {
             [Op.regexp]:tags_reg
         }
         delete request_params.tags_reg;
+    }
+    // 根据标题筛选
+    if(!!title_reg){
+        request_params.title = {
+            [Op.regexp]:title_reg
+        }
+        delete request_params.title_reg;
+    }
+    // 根据副标题筛选
+    if(!!subtitle_reg){
+        request_params.substitle = {
+            [Op.regexp]:subtitle_reg
+        }
+        delete request_params.subtitle_reg;
     }
 
     if(!!is_basic) delete request_params.is_basic
