@@ -98,11 +98,50 @@ const ProductPriceInfo = sequelize.define('ProductPriceInfo',{
     collate: 'utf8_unicode_ci'
 });
 
+// 用户信息
+const UserInfos = sequelize.define('UserInfos',{
+    openid: { type: DataTypes.STRING,primaryKey: true },
+    appid: { type: DataTypes.STRING,defaultValue:'' },
+    name: { type: DataTypes.STRING,defaultValue:'' },
+    gender: { type: DataTypes.STRING,defaultValue:'' },
+    phone: { type: DataTypes.STRING,defaultValue:'' },
+    location: { type: DataTypes.STRING,defaultValue:'' },
+    compony: { type: DataTypes.STRING,defaultValue:'' },
+}, {
+    timestamps: false,
+    charset: 'utf8',
+    collate: 'utf8_unicode_ci'
+});
+
+// 用户收藏
+const UserFavoriteProduct = sequelize.define('UserFavoriteProduct',{
+    openid: { type: DataTypes.STRING },
+    pro_id: { type: DataTypes.STRING,defaultValue:'' },
+}, {
+    timestamps: true,
+    charset: 'utf8',
+    collate: 'utf8_unicode_ci'
+});
+
+// 用户足迹
+const UserHistoryProduct = sequelize.define('UserHistoryProduct',{
+    openid: { type: DataTypes.STRING},
+    pro_id: { type: DataTypes.STRING,defaultValue:'' },
+    count: { type: DataTypes.INTEGER },
+}, {
+    timestamps: true,
+    charset: 'utf8',
+    collate: 'utf8_unicode_ci'
+});
+
 module.exports = {
     HomeModules,
     IntroductionModules,
     ProductBasicInfo,
     ProductImageInfo,
     ProductDetailInfo,
-    ProductPriceInfo
+    ProductPriceInfo,
+    UserInfos,
+    UserFavoriteProduct,
+    UserHistoryProduct,
 };
