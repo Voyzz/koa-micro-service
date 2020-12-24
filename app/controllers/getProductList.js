@@ -110,7 +110,10 @@ module.exports = async (ctx) => {
             let price_list = await ProductPriceInfo.findAll({
                 where:{
                     pro_id:pro.pro_id
-                }
+                },
+                order:[
+                    ['date','DESC']
+                ]
             });
             if(!!price_list) pro.price_list = price_list;
         }
