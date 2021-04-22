@@ -1,3 +1,4 @@
 node_modules/
 package-lock.json
 app/sql_config.js
+app/utils/token_secret.js
