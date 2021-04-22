@@ -134,6 +134,15 @@ const UserHistoryProduct = sequelize.define('UserHistoryProduct',{
     collate: 'utf8_unicode_ci'
 });
 
+// 登录密码
+const CheckLogin = sequelize.define('CheckLogin',{
+    userName: { type: DataTypes.STRING},
+    userKey: { type: DataTypes.STRING },
+    userType: { type: DataTypes.STRING,defaultValue:'guest' },
+}, {
+    timestamps: false,
+});
+
 module.exports = {
     HomeModules,
     IntroductionModules,
@@ -144,4 +153,5 @@ module.exports = {
     UserInfos,
     UserFavoriteProduct,
     UserHistoryProduct,
+    CheckLogin,
 };

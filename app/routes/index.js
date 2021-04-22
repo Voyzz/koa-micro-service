@@ -31,4 +31,7 @@ router.post('/getUserFavoList', controllers.getUserFavoList);
 // 获取用户历史访问列表
 router.post('/getUserHistoryList', controllers.getUserHistoryList);
 
+// 登录验证
+router.post('/checkLogin', controllers.checkLogin);
+
 module.exports = router;
